@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071c3b">
+  <title>DigiNerve | Student Registration</title>
+  <meta name="description" content="DigiNerve MBBS student registration portal. Explore learning plans for every year of MBBS.">
+  <style>
+    :root {
+      --navy: #071c3b;
+      --blue: #0879e8;
+      --cyan: #58d5ed;
+      --ink: #172b46;
+      --muted: #687990;
+      --line: #e1eaf4;
+      --bg: #f3f8fd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 17px 22px;
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .logo-placeholder {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: white;
+      color: var(--blue);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .nav-note {
+      font-size: 12px;
+      color: #d4e8ff;
+      text-align: right;
+    }
+
+    .hero {
+      background:
+        radial-gradient(ellipse at 85% 15%, #164e86 0, transparent 40%),
+        linear-gradient(130deg, #071c3b, #0b3769);
+      color: white;
+      padding: 62px 22px 75px;
+    }
+
+    .hero-inner {
+      max-width: 1080px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid #4984b6;
+      border-radius: 30px;
+      color: #9beaff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 660px;
+      font-size: clamp(36px, 5vw, 57px);
+      line-height: 1.1;
+      letter-spacing: -1.8px;
+      margin: 20px 0;
+    }
+
+    h1 span { color: var(--cyan); }
+
+    .hero p {
+      max-width: 570px;
+      color: #d4e2f3;
+      font-size: 16px;
+    }
+
+    .hero-card {
+      padding: 26px;
+      border: 1px solid #4274a3;
+      border-radius: 22px;
+      background: #ffffff0d;
+    }
+
+    .hero-card .symbol {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    .hero-card h2 {
+      font-size: 20px;
+      margin: 0 0 8px;
+    }
+
+    .hero-card p { font-size: 14px; margin-bottom: 0; }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      margin-top: 25px;
+      color: #e2f1ff;
+      font-size: 13px;
+    }
+
+    .main {
+      max-width: 1080px;
+      margin: -30px auto 0;
+      padding: 0 20px 50px;
+      position: relative;
+    }
+
+    .form-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 55px #183b6110;
+      padding: clamp(22px, 4vw, 42px);
+    }
+
+    .section-title {
+      margin: 0 0 6px;
+      font-size: 26px;
+      letter-spacing: -.6px;
+    }
+
+    .subtext { color: var(--muted); margin-top: 0; }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 25px 0 9px;
+    }
+
+    .progress {
+      height: 6px;
+      background: #e9f0f8;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 33.333%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      transition: width .2s;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .full { grid-column: 1 / -1; }
+
+    label, legend {
+      font-size: 13px;
+      font-weight: 700;
+      color: #243b58;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 49px;
+      padding: 12px 14px;
+      border: 1px solid #d8e3ef;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px #0879e817;
+    }
+
+    .hint { color: var(--muted); font-size: 12px; }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 8px;
+    }
+
+    .plan {
+      border: 1px solid #dce7f2;
+      border-radius: 14px;
+      padding: 17px;
+      cursor: pointer;
+      display: block;
+      background: #fff;
+    }
+
+    .plan:has(input:checked) {
+      border-color: var(--blue);
+      background: #f0f8ff;
+      box-shadow: 0 0 0 1px var(--blue);
+    }
+
+    .plan input { width: auto; min-height: auto; margin: 0 7px 0 0; }
+    .plan strong { display: block; margin-top: 9px; font-size: 14px; }
+    .plan small { display: block; margin-top: 4px; color: var(--muted); }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 16px;
+      background: #f5f9fd;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .consent input { width: 18px; min-height: 18px; margin-top: 3px; }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 22px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary {
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 5px 14px #0879e82b;
+    }
+
+    .primary:hover { background: #0668c9; }
+    .secondary { background: #edf3f9; color: var(--ink); }
+    button:disabled { opacity: .6; cursor: wait; }
+
+    .footer {
+      text-align: center;
+      padding: 24px 18px 35px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer strong { color: var(--navy); }
+
+    @media (max-width: 720px) {
+      .hero { padding: 42px 20px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 26px; }
+      .hero-card { display: none; }
+      .nav-note { max-width: 120px; }
+      .fields, .plans { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+      .form-card { border-radius: 17px; }
+      .section-title { font-size: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo-placeholder">DN</div>
+        <span>DigiNerve</span>
+      </div>
+      <div class="nav-note">Medical Learning<br>Student Registration</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">Your medical journey starts here</span>
+        <h1>Learn smarter.<br><span>Become a better doctor.</span></h1>
+        <p>
+          Explore DigiNerve learning plans designed to support you
+          throughout MBBS and help you prepare for your next academic milestone.
+        </p>
+        <div class="trust-row">
+          <span>✓ Plans for every MBBS year</span>
+          <span>✓ Simple registration</span>
+          <span>✓ Student-focused learning</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="symbol">🩺</div>
+        <h2>Your goals. Your plan.</h2>
+        <p>Tell us about your college, batch and learning needs. Our team can guide you to the relevant plan.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <section class="form-card">
+      <h2 class="section-title">Student registration</h2>
+      <p class="subtext">Complete the three short sections below. Fields marked * are required.</p>
+
+      <div class="progress-label">
+        <span id="step-label">Step 1 of 3 · Your details</span>
+        <span id="step-percent">33%</span>
+      </div>
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+
+      <form id="registration-form">
+        <section class="page active" data-step="0">
+          <h3>01 — About you</h3>
+          <p class="subtext">Let's start with your basic details.</p>
+          <div class="fields">
+            <div class="field full">
+              <label for="fullName">Full name *</label>
+              <input id="fullName" name="fullName" autocomplete="name" required maxlength="100" placeholder="Enter your full name">
+            </div>
+            <div class="field">
+              <label for="whatsapp">WhatsApp number *</label>
+              <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" pattern="[6-9][0-9]{9}" maxlength="10" required placeholder="10-digit mobile number">
+              <span class="hint">Enter an Indian mobile number without +91.</span>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="150" placeholder="you@example.com">
+            </div>
+            <div class="field full">
+              <label for="college">Medical college *</label>
+              <select id="college" name="college" required>
+                <option value="">Select your college</option>
+                <option>Government Medical College, Thiruvananthapuram</option>
+                <option>Government Medical College, Kozhikode</option>
+                <option>Government Medical College, Kottayam</option>
+                <option>Government Medical College, Thrissur</option>
+                <option>Government Medical College, Ernakulam</option>
+                <option>Government Medical College, Manjeri</option>
+                <option>Government Medical College, Kannur</option>
+                <option>Government Medical College, Kollam</option>
+                <option>Government Medical College, Palakkad</option>
+                <option>Government Medical College, Konni</option>
+                <option>Government Medical College, Kasaragod</option>
+                <option>Government Medical College, Wayanad</option>
+                <option>Amrita School of Medicine, Kochi</option>
+                <option>Jubilee Mission Medical College, Thrissur</option>
+                <option>Malankara Orthodox Syrian Church Medical College</option>
+                <option>Pushpagiri Institute of Medical Sciences</option>
+                <option>KMCT Medical College</option>
+                <option>Malabar Medical College</option>
+                <option>MES Medical College</option>
+                <option>Travancore Medical College</option>
+                <option>Believers Church Medical College</option>
+                <option>Other medical college in Kerala</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="collegeOther">If you selected “Other”, enter your college name</label>
+              <input id="collegeOther" name="collegeOther" maxlength="150" placeholder="College name (if applicable)">
+            </div>
+          </div>
+          <div class="actions">
+            <span></span>
+            <button class="primary" type="button" data-next>Continue →</button>
+          </div>
+        </section>
+
+        <section class="page" data-step="1">
+          <h3>02 — Your learning plan</h3>
+          <p class="subtext">Choose your current year and the plan you're interested in.</p>
+          <div class="fields">
+            <div class="field">
+              <label for="batch">Current MBBS year / batch *</label>
+              <select id="batch" name="batch" required>
+                <option value="">Select your year</option>
+                <option>First Year MBBS</option>
+                <option>Second Year MBBS</option>
+                <option>Third Year MBBS</option>
+                <option>Final Year MBBS</option>
+                <option>Internship</option>
+                <option>Graduate / NEET PG aspirant</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="targetExam">Target exam *</label>
+              <select id="targetExam" name="targetExam" required>
+                <option value="">Select target exam</option>
+                <option>NEET PG</option>
+                <option>INI-CET</option>
+                <option>Both NEET PG and INI-CET</option>
+                <option>Not decided yet</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>Plan interested in *</label>
+              <div class="plans">
+                <label class="plan">
+                  <span><input type="radio" name="plan" value="DigiOne" required> DigiOne</span>
+                  <strong>First-year foundation</strong>
+                  <small>Anatomy, Biochemistry and Physiology</small>
+                </label>
+                <label class="plan">
+                  <span><input type="radio" name="plan" value="MBBS Year Plan"> MBBS Year Plan</span>
+                  <strong>Academic learning support</strong>
+                  <small>For your current MBBS year</small>
+                </label>
+                <label class="plan">
+                  <span><input type="radio" name="plan" value="NEET PG Plan"> NEET PG Plan</span>
+                  <strong>Entrance exam preparation</strong>
+                  <small>Explore preparation resources</small>
+                </label>
+                <label class="plan">
+                  <span><input type="radio" name="plan" value="INI-CET Plan"> INI-CET Plan</span>
+                  <strong>INI-CET preparation</strong>
+                  <small>Explore relevant learning options</small>
+                </label>
+                <label class="plan">
+                  <span><input type="radio" name="plan" value="Need guidance"> Need guidance</span>
+                  <strong>Help me choose</strong>
+                  <small>Our team can explain available plans</small>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="secondary" type="button" data-back>← Back</button>
+            <button class="primary" type="button" data-next>Continue →</button>
+          </div>
+        </section>
+
+        <section class="page" data-step="2">
+          <h3>03 — Final details</h3>
+          <p class="subtext">You're almost done. Review your preferences and submit.</p>
+          <div class="fields">
+            <div class="field">
+              <label for="groupSize">Expected group size</label>
+              <select id="groupSize" name="groupSize">
+                <option value="">Select if applicable</option>
+                <option>Just me</option>
+                <option>2–5 students</option>
+                <option>6–10 students</option>
+                <option>11–25 students</option>
+                <option>26–50 students</option>
+                <option>More than 50 students</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="referredBy">Referred by</label>
+              <input id="referredBy" name="referredBy" maxlength="100" placeholder="Friend, representative, etc.">
+            </div>
+            <div class="field full">
+              <label for="notes">Questions or additional information (optional)</label>
+              <textarea id="notes" name="notes" rows="3" maxlength="500" placeholder="Tell us what you'd like to know"></textarea>
+            </div>
+            <div class="field full">
+              <label class="consent">
+                <input type="checkbox" name="consent" value="Yes" required>
+                <span>I agree to be contacted by DigiNerve regarding my registration and the learning plans I selected. I understand that submitting this form does not itself confirm a purchase or payment.</span>
+              </label>
+            </div>
+          </div>
+          <div id="form-status" class="hint" role="status" aria-live="polite"></div>
+          <div class="actions">
+            <button class="secondary" type="button" data-back>← Back</button>
+            <button class="primary" type="submit" id="submit-button">Submit registration</button>
+          </div>
+        </section>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <strong>DigiNerve</strong> · Medical learning for your journey ahead<br>
+    Please verify your details before submitting. Your registration will be connected to the official response system in a later setup step.
+  </footer>
+
+  <script>
+    (() => {
+      const form = document.getElementById("registration-form");
+      const pages = Array.from(document.querySelectorAll(".page"));
+      const fill = document.getElementById("progress-fill");
+      const label = document.getElementById("step-label");
+      const percent = document.getElementById("step-percent");
+      let current = 0;
+      const names = ["Your details", "Learning plan", "Final details"];
+
+      function showPage(index) {
+        current = index;
+        pages.forEach((page, i) => page.classList.toggle("active", i === index));
+        fill.style.width = ((index + 1) / pages.length * 100) + "%";
+        label.textContent = "Step " + (index + 1) + " of 3 · " + names[index];
+        percent.textContent = Math.round((index + 1) / pages.length * 100) + "%";
+        document.querySelector(".form-card").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function validateCurrentPage() {
+        const fields = Array.from(pages[current].querySelectorAll("input, select, textarea"));
+        for (const field of fields) {
+          if (field.type === "radio" && field.name === "plan") {
+            if (!pages[current].querySelector('input[name="plan"]:checked')) {
+              field.setCustomValidity("Please select a plan.");
+              field.reportValidity();
+              field.setCustomValidity("");
+              return false;
+            }
+            continue;
+          }
+          if (!field.checkValidity()) {
+            field.reportValidity();
+            field.focus();
+            return false;
+          }
+        }
+        return true;
+      }
+
+      document.querySelectorAll("[data-next]").forEach(button => {
+        button.addEventListener("click", () => {
+          if (validateCurrentPage()) showPage(Math.min(current + 1, pages.length - 1));
+        });
+      });
+
+      document.querySelectorAll("[data-back]").forEach(button => {
+        button.addEventListener("click", () => showPage(Math.max(current - 1, 0)));
+      });
+
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        if (!validateCurrentPage()) return;
+        document.getElementById("form-status").textContent =
+          "The design is ready. Registration submission will be enabled after we connect Google Sheets in the next steps.";
+      });
+
+      document.getElementById("collegeOther").addEventListener("input", event => {
+        const college = document.getElementById("college");
+        if (college.value === "Other medical college in Kerala" && event.target.value.trim()) {
+          event.target.setCustomValidity("");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
