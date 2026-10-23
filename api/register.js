@@ -6,7 +6,7 @@ export default async function handler(req,res){
   const fields=['name','whatsapp','email','college','collegeOther','year','exam','plan','groupSize','referredBy','notes'];
   const clean={};
   for(const key of fields)clean[key]=String(data[key]??'').trim().slice(0,key==='notes'?500:180);
-  if(!clean.name||!/^\\d{10}$/.test(clean.whatsapp)||!clean.college||!clean.year||!clean.exam||!clean.plan||data.consent!==true)return res.status(400).json({error:'Please complete the required fields.'});
+  if(!clean.name||!/^[6-9][0-9]{9}$/.test(clean.whatsapp)||!clean.college||!clean.year||!clean.exam||!clean.plan||data.consent!==true)return res.status(400).json({error:'Please complete the required fields.'});
   const allowedPlans=['DigiOne','DigiTwo','DigiNEET','Mission INI-CET 2026','Need guidance'];
   if(!allowedPlans.includes(clean.plan))return res.status(400).json({error:'Please choose a valid learning plan.'});
   try{
