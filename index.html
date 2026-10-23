@@ -85,5 +85,23 @@ footer{min-height:74px;background:#092c55;color:#dce9f6;display:flex;justify-con
 </form></div></main></div>
 <footer><div><strong>digi<span>nerve</span>➤</strong> &nbsp; A Jaypee Brothers Publications Company</div><nav><a href="https://www.diginerve.com/about-us/" target="_blank" rel="noopener">About DigiNerve</a> &nbsp; | &nbsp; <a href="https://www.diginerve.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> &nbsp; | &nbsp; <a href="https://www.diginerve.com/" target="_blank" rel="noopener">www.diginerve.com</a></nav></footer><a class="contact-anoof" href="https://wa.me/917994056793?text=Hi%20Anoof%2C%20I%20would%20like%20to%20know%20more%20about%20DigiNerve." target="_blank" rel="noopener noreferrer" aria-label="Connect with Anoof on WhatsApp"><span aria-hidden="true">✆</span> Connect with Anoof</a>
 <script>
-const form=document.getElementById('registration');const college=document.getElementById('college');const other=document.getElementById('collegeOther');college.addEventListener('change',()=>{other.required=college.value==='Other medical college in Kerala';other.setCustomValidity('')});form.addEventListener('submit',e=>{e.preventDefault();const checked=form.querySelector('input[name="plan"]:checked');if(!checked){document.getElementById('status').textContent='Please choose a learning plan.';form.querySelector('input[name="plan"]').focus();return}if(!form.reportValidity())return;document.getElementById('status').textContent='Registration is not enabled yet. Your information was not sent or stored. Please wait until the secure response system is connected.'});
+const form=document.getElementById('registration');const college=document.getElementById('college');const other=document.getElementById('collegeOther');college.addEventListener('change',()=>{other.required=college.value==='Other medical college in Kerala';other.setCustomValidity('')});form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const status=document.getElementById('status');
+ const checked=form.querySelector('input[name="plan"]:checked');
+ if(!checked){status.textContent='Please choose a learning plan.';form.querySelector('input[name="plan"]').focus();return;}
+ if(!form.reportValidity())return;
+ const btn=form.querySelector('button[type="submit"]');
+ const data=new FormData(form);
+ const payload={name:data.get('fullName'),whatsapp:data.get('whatsapp'),email:data.get('email'),college:data.get('college'),collegeOther:data.get('collegeOther'),year:data.get('batch'),exam:data.get('targetExam'),plan:data.get('plan'),groupSize:data.get('groupSize'),referredBy:data.get('referredBy'),notes:data.get('notes'),consent:form.elements.consent.checked};
+ btn.disabled=true;btn.textContent='Submitting…';status.textContent='Submitting your registration…';
+ try{
+  const response=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const result=await response.json();
+  if(!response.ok||!result.ok){status.textContent=result.error||'Unable to save registration. Please try again.';return;}
+  status.textContent='Registration submitted successfully! Our team will contact you.';
+  form.reset();other.required=false;
+ }catch{status.textContent='Connection problem. Your registration was not confirmed. Please try again.';}
+ finally{btn.disabled=false;btn.textContent='Submit Registration →';}
+});
 </script></body></html>
