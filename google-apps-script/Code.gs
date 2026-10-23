@@ -12,7 +12,7 @@ function doPost(e) {
     const keys = ['createdAt','name','whatsapp','email','college','collegeOther','year','exam','plan','groupSize','referredBy','notes','consent'];
     const safe = (value) => {
       const s = String(value == null ? '' : value).slice(0,500);
-      return /^[=+@\\-]/.test(s) ? "'" + s : s;
+      return /^[=+@-]/.test(s) ? "'" + s : s;
     };
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
