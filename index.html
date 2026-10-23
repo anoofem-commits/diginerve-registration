@@ -302,6 +302,8 @@
     }
 
     .footer strong { color: var(--navy); }
+    .footer a { color: #0879e8; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
 
     @media (max-width: 720px) {
       .hero { padding: 42px 20px 60px; }
@@ -319,8 +321,8 @@
   <header class="topbar">
     <div class="nav">
       <div class="brand">
-        <div class="logo-placeholder">DN</div>
-        <span>DigiNerve</span>
+        <div class="logo-placeholder" aria-hidden="true">✚</div>
+        <span>Digi<span style="color:#58d5ed">Nerve</span></span>
       </div>
       <div class="nav-note">Medical Learning<br>Student Registration</div>
     </div>
@@ -523,7 +525,7 @@
 
   <footer class="footer">
     <strong>DigiNerve</strong> · Medical learning for your journey ahead<br>
-    Please verify your details before submitting. Your registration will be connected to the official response system in a later setup step.
+    An EdTech initiative by Jaypee Brothers Medical Publishers Pvt. Ltd.<br><a href="https://www.diginerve.com/" target="_blank" rel="noopener noreferrer">Official website</a> · <a href="https://www.diginerve.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy policy</a><br>Registration submissions are not yet enabled. No details are stored until the response system is connected.
   </footer>
 
   <script>
@@ -581,6 +583,11 @@
         if (!validateCurrentPage()) return;
         document.getElementById("form-status").textContent =
           "The design is ready. Registration submission will be enabled after we connect Google Sheets in the next steps.";
+      });
+
+      document.getElementById("college").addEventListener("change", event => {
+        const other = document.getElementById("collegeOther");
+        other.required = event.target.value === "Other medical college in Kerala";
       });
 
       document.getElementById("collegeOther").addEventListener("input", event => {
