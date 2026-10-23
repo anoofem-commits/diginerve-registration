@@ -354,7 +354,60 @@ body{background:#eaf4fc}
 @media(max-width:950px){.site-shell{grid-template-columns:1fr}.hero{padding:42px 24px}.hero-card{display:none}.main{padding:18px}.trust-row{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.trust-row{grid-template-columns:1fr}.topbar{padding:12px 16px}.brand{font-size:22px}.main{padding:12px}.hero h1{font-size:39px}}
 
-  </style>
+  
+/* Visual rebuild to match approved promotional mockup */
+body{background:#e6f3fc}
+.topbar{background:#fff;border-bottom:0;padding:14px 4vw}
+.nav{max-width:1600px}
+.site-shell{max-width:1600px;grid-template-columns:49% 51%;min-height:840px}
+.hero{padding:54px clamp(28px,5vw,95px) 35px;background:radial-gradient(ellipse at 5% 85%,#70a4cf9c,transparent 43%),linear-gradient(118deg,#ffffffed 5%,#e5f5ffb5 55%,#7cb4de77 100%);overflow:hidden}
+.hero:before{width:500px;height:500px;border:0;background:radial-gradient(circle,#b9dcf58a,transparent 70%);top:15%;right:-100px}
+.hero-inner{max-width:100%}
+.hero h1{font-size:clamp(39px,4vw,63px);line-height:1.07;margin:25px 0 15px}
+.hero p{max-width:490px;font-size:18px;line-height:1.42}
+.eyebrow{border-radius:6px;color:#fff;background:#0c3c7b;font-size:11px;padding:7px 12px;border:0}
+.trust-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:27px;max-width:470px}
+.trust-row span{padding:11px 10px;background:#ffffffa6;border:1px solid #d3e7f4;color:#113e71;font-weight:600;font-size:12px}
+.hero-card{position:relative;margin-top:30px;max-width:440px;border:0;background:transparent;box-shadow:none;padding:0}
+.hero-card .symbol{display:none}
+.hero-card h2{font-family:cursive;font-style:italic;font-size:33px;transform:rotate(-4deg);line-height:1.1;color:#0c3b7b}
+.hero-card p{display:none}
+.phone-demo{position:absolute;right:2%;bottom:-85px;width:205px;height:340px;border:9px solid #102d4c;border-radius:31px;transform:rotate(11deg);background:#f5fbff;box-shadow:0 16px 40px #103c6a55;z-index:0;overflow:hidden;padding:20px 12px}
+.phone-demo:before{content:"";position:absolute;top:0;left:60px;width:65px;height:12px;background:#102d4c;border-radius:0 0 12px 12px}
+.phone-logo{font-size:22px;font-weight:900;color:#064485;letter-spacing:-1px;text-align:center}
+.phone-logo span{color:#e7a820}
+.phone-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
+.phone-grid div{min-height:66px;background:#e4f1fa;border-radius:11px;padding:12px 6px;text-align:center;color:#124a7f;font-size:10px;font-weight:700}
+.phone-grid b{display:block;font-size:21px}
+.main{background:linear-gradient(135deg,#a3ccec,#e7f4ff);padding:24px;align-items:stretch}
+.form-card{padding:clamp(18px,2.3vw,34px);border:1px solid #d8e9f7;border-radius:22px}
+.section-title{font-size:27px}
+.form-card>.subtext{font-size:13px}
+.progress-label,.progress{display:none}
+.page,.page.active{display:block!important;background:#ffffff;border:1px solid #dbe7f1;border-radius:17px;padding:17px 18px;margin-top:12px}
+.page h3{font-size:17px;color:#0b3b75;margin:0 0 10px}
+.page>.subtext{display:none}
+.fields{gap:12px}
+.field{gap:4px}
+label,legend{font-size:11px;color:#0d3262}
+input,select,textarea{min-height:37px;padding:8px 10px;border-radius:7px;font-size:12px}
+textarea{min-height:60px}
+.hint{font-size:10px}
+.plans{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.plan{padding:10px 7px;border-radius:9px;min-height:108px}
+.plan span{font-size:10px}
+.plan strong{font-size:11px;line-height:1.25}
+.plan small{font-size:9px;line-height:1.25}
+.plan input{margin-right:2px}
+.page .actions{display:none}
+.page:last-child .actions{display:flex;justify-content:flex-end;margin-top:13px}
+.page:last-child .secondary{display:none}
+.consent{padding:10px;font-size:11px}
+.footer{background:#082a51}
+@media(max-width:1100px){.site-shell{grid-template-columns:1fr}.hero{min-height:620px}.main{padding:20px}.phone-demo{right:6%;bottom:-20px}.plans{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.hero{min-height:670px;padding:36px 22px}.phone-demo{width:140px;height:255px;right:5%;bottom:-55px}.phone-grid div{min-height:42px;font-size:8px;padding:5px 3px}.phone-grid b{font-size:14px}.phone-logo{font-size:16px}.hero-card{max-width:220px}.hero-card h2{font-size:26px}.trust-row{grid-template-columns:1fr 1fr}.plans{grid-template-columns:repeat(2,minmax(0,1fr))}.main{padding:12px}.page{padding:13px}.fields{grid-template-columns:1fr 1fr}.field.full{grid-column:1/-1}.section-title{font-size:24px}}
+@media(max-width:390px){.fields{grid-template-columns:1fr}.plans{grid-template-columns:1fr 1fr}.phone-demo{opacity:.65}}
+</style>
 </head>
 <body>
   <header class="topbar">
@@ -388,6 +441,7 @@ body{background:#eaf4fc}
         <p>Expert-led learning, practice resources and guidance for your MBBS journey.</p>
       </div>
     </div>
+    <div class="phone-demo" aria-hidden="true"><div class="phone-logo">digi<span>nerve</span> ➤</div><div class="phone-grid"><div><b>▶</b>Video lectures</div><div><b>▤</b>Notes</div><div><b>✓</b>MCQs</div><div><b>▣</b>PYQs</div><div><b>◈</b>Flashcards</div><div><b>✦</b>AI Doubts</div><div><b>♧</b>Grand Tests</div><div><b>▦</b>Study Plan</div></div></div>
   </section>
 
   <main class="main">
@@ -620,9 +674,9 @@ body{background:#eaf4fc}
 
       form.addEventListener("submit", event => {
         event.preventDefault();
-        if (!validateCurrentPage()) return;
+        if (!form.reportValidity()) return;
         document.getElementById("form-status").textContent =
-          "The design is ready. Registration submission will be enabled after we connect Google Sheets in the next steps.";
+          "Registration is not active yet. Your information has not been sent or stored. Google Sheets connection is required.";
       });
 
       document.getElementById("college").addEventListener("change", event => {
